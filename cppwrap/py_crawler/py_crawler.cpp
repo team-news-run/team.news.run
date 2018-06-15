@@ -14,9 +14,9 @@
 // C dependency
 #include <stdlib.h>
 
-PyCrawler::PyCrawler() {
-    pyInterpreter = std::string {"python3"};
-    scriptFile = std::string{"news_crawler.py"};
+PyCrawler::PyCrawler(const std::string& url, const std::string& pyVer, \
+                     const std::string& pyScript) \
+   : urlForRequest{url}, pyInterpreter{pyVer}, scriptFile{pyScript} {
 
     execPyScript();
     checkContentsExist();
@@ -54,8 +54,9 @@ void PyCrawler::execPyScript() {
         throw "Failed to fork()";
     }
     else if(pid == 0) { // Child process
+        std::string pyArgs = scriptFile + " " + urlForRequest;
         const char* prog = pyInterpreter.c_str();
-        const char* args = scriptFile.c_str();
+        const char* args = pyArgs.c_str();
         int res = execlp(prog, prog, args, NULL); 
         if(res < 0) {
             exit(-1);
@@ -73,3 +74,4 @@ void PyCrawler::execPyScript() {
         }
     }
 }
+

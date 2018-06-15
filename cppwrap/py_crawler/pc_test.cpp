@@ -12,7 +12,8 @@ int main(int argc, char* argv[]) {
 
     std::vector<std::string> contentsFiles {};
     try {
-        PyCrawler pc;
+        std::string society {"http://media.daum.net/society"};
+        PyCrawler pc(society);
         contentsFiles = pc.getContentsFiles();
         std::cout << "get contents files." << std::endl;
     }
