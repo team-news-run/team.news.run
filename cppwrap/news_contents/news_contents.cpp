@@ -29,6 +29,7 @@ std::vector<std::string> NewsContents::contents(const std::string& topic) {
         std::string text((std::istreambuf_iterator<char>(fst)), \
                           std::istreambuf_iterator<char>());
         newsContents.push_back(text);
+        fst.close();
     }
 
     return newsContents;
