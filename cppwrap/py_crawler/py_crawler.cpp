@@ -1,6 +1,8 @@
 // C++ dependency
 #include <vector>
 #include <iostream>
+#include <fstream>
+#include <string>
 
 #include "py_crawler.h"
 
@@ -17,13 +19,33 @@ PyCrawler::PyCrawler() {
     scriptFile = std::string{"news_crawler.py"};
 
     execPyScript();
+    checkContentsExist();
 }
 
 PyCrawler::~PyCrawler() {
 }
 
-std::vector<std::string> PyCrawler::getOutFiles() {
-    return outFiles;
+std::vector<std::string> PyCrawler::getContentsFiles() {
+    return contentsFiles;
+}
+
+bool PyCrawler::isFileExist(const std::string& file) {
+    std::fstream fst(file);
+    return (!fst) ? false : true;
+}
+
+void PyCrawler::checkContentsExist() {
+    // crawled contents file parameters
+    const std::string nameBase {"output"};  // file name base
+    const std::string suffix {".txt"};      // file extension
+    const int maxnum {10};   // maximum a number of contents files
+
+    for(int num = 0; num < maxnum; ++num) {
+        std::string file {nameBase + std::to_string(num) + suffix};
+        if(isFileExist(file)) {
+            contentsFiles.push_back(file);
+        }
+    }
 }
 
 void PyCrawler::execPyScript() {
@@ -31,7 +53,7 @@ void PyCrawler::execPyScript() {
     if(pid < 0) {
         throw "Failed to fork()";
     }
-    else if(pid == 0) {
+    else if(pid == 0) { // Child process
         const char* prog = pyInterpreter.c_str();
         const char* args = scriptFile.c_str();
         int res = execlp(prog, prog, args, NULL); 
@@ -40,13 +62,13 @@ void PyCrawler::execPyScript() {
         }
         exit(0);
     }
-    else {
+    else {  // Parent process
         int stat_val;
         wait(&stat_val);
         if(WIFEXITED(stat_val) && !WEXITSTATUS(stat_val)) {
             return;
         }
-        else {
+        else {  // Child process가 정상종료 되지 않을 경우 예외 발생
             throw "Failed to execute py_script";
         }
     }

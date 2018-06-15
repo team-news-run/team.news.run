@@ -9,13 +9,15 @@ public:
     PyCrawler();
     virtual ~PyCrawler();
 
-    std::vector<std::string> getOutFiles();
+    std::vector<std::string> getContentsFiles();
 private:
-    void execPyScript();
+    void execPyScript();    // python script 실행
+    void checkContentsExist();  // crawled contents file이 존재하는지 확인
+    bool isFileExist(const std::string&);
 
     std::string pyInterpreter;
     std::string scriptFile;
-    std::vector<std::string> outFiles;
+    std::vector<std::string> contentsFiles;
 };
 
 #endif
