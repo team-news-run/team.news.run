@@ -1,10 +1,10 @@
-TARGET = nc_test
+TARGET = get_news
 
 CXX = g++
 CXXFLAGS = -std=c++14 -W -Wall
 LFLAGS = -I.
 
-SRCS = news_contents.cpp py_crawler.cpp nc_test.cpp
+SRCS = news_contents.cpp py_crawler.cpp main.cpp
 
 OUTPUT_FILE_FORMAT = news_?.txt
 
