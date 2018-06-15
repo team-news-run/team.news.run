@@ -5,10 +5,15 @@
 #include "news_contents.h"
 
 int main(int argc, char* argv[]) {
+    if(argc != 2) {
+        std::cout << "Usage : " << argv[0] << " topic" << std::endl;
+        return -1;
+    }
+
     try {
         // NewsContents 객체 생성
         NewsContents nc;
-        std::string topic {"economic"};
+        std::string topic {argv[1]};
         // topic을 요청하면 요약된 news 기사를 얻는다.
         std::vector<std::string> contents = nc.contents(topic);
 
