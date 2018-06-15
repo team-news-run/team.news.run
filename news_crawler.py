@@ -68,10 +68,10 @@ def preclean_text(text):
 def main():
 	a=0
 	## argument is URL for Crawler
-#	URL = sys.argv[1]
+	URL = sys.argv[1]
 
 
-	result_text = preclean_text(get_text(get_url(URL_so)))
+	result_text = preclean_text(get_text(get_url(URL)))
 	
 	for re in result_text:
 		open_output_file = open(OUTPUT_FILE_BASE+str(a)+str('.txt'),'w')
