@@ -53,7 +53,7 @@ void NewsContents::buildTable() {
     table.insert(std::make_pair(topics::digital, topicUrl(topics::digital)));
 }
 
-const std::string& NewsContents::topicUrl(const std::string& topic) {
+std::string NewsContents::topicUrl(const std::string& topic) {
     return std::string {topics::url_base + topic + topics::url_suffix};
 }
 

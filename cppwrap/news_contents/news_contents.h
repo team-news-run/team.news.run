@@ -16,7 +16,7 @@ class NewsContents {
     std::map<std::string, std::string> table;
 
     void buildTable();
-    const std::string& topicUrl(const std::string& topic);
+    std::string topicUrl(const std::string& topic);
 
 };
 
