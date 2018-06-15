@@ -36,9 +36,9 @@ bool PyCrawler::isFileExist(const std::string& file) {
 
 void PyCrawler::checkContentsExist() {
     // crawled contents file parameters
-    const std::string nameBase {"output"};  // file name base
+    const std::string nameBase {"news_"};  // file name base
     const std::string suffix {".txt"};      // file extension
-    const int maxnum {10};   // maximum a number of contents files
+    const int maxnum {5};   // maximum a number of contents files
 
     for(int num = 0; num < maxnum; ++num) {
         std::string file {nameBase + std::to_string(num) + suffix};
@@ -56,8 +56,9 @@ void PyCrawler::execPyScript() {
     else if(pid == 0) { // Child process
         std::string pyArgs = scriptFile + " " + urlForRequest;
         const char* prog = pyInterpreter.c_str();
-        const char* args = pyArgs.c_str();
-        int res = execlp(prog, prog, args, NULL); 
+        const char* args1 = scriptFile.c_str();
+        const char* args2 = urlForRequest.c_str();
+        int res = execlp(prog, prog, args1, args2, NULL); 
         if(res < 0) {
             exit(-1);
         }

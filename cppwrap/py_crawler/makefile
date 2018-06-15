@@ -6,10 +6,10 @@ LFLAGS = -I.
 
 SRCS = py_crawler.cpp pc_test.cpp
 
-OUTPUT_TEXT_BASE = output
+OUTPUT_TEXT_BASE = news_?.txt
 
 $(TARGET) :
 	$(CXX) $(CXXFLAGS) $(SRCS) -o $(TARGET) $(LFLAGS)
 
 clean :
-	rm -f $(TARGET) $(OUTPUT_TEXT_BASE)*.txt
+	rm -f $(TARGET) $(OUTPUT_TEXT_BASE)
