@@ -3,7 +3,7 @@
 ######################################################################
 
 TEMPLATE = app
-TARGET = 
+TARGET = raspberrypi_qt
 DEPENDPATH += .
 INCLUDEPATH += .
 
