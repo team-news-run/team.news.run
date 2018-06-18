@@ -24,25 +24,12 @@ std::vector<std::string> NewsContents::contents(const std::string& topic) {
     std::vector<std::string> newsContents;
 
     std::vector<std::string> contentsList = pc.getContentsFiles();
-
-    int i = 0;
-    int size = contentsList.size();
-
-    for(i = 0; i < size; ++i){
-        std::string contentsFile = contentsList[i];
+    for(const auto& contentsFile : contentsList) {
         std::ifstream fst(contentsFile);
-        std::string text((std::istreambuf_iterator<char>(fst)), std::istreambuf_iterator<char>());
+        std::string text((std::istreambuf_iterator<char>(fst)), \
+                          std::istreambuf_iterator<char>());
         newsContents.push_back(text);
     }
-
-
-
-    //for(const auto& contentsFile : contentsList) {
-    //    std::ifstream fst(contentsFile);
-    //    std::string text((std::istreambuf_iterator<char>(fst)), \
-    //                      std::istreambuf_iterator<char>());
-    //    newsContents.push_back(text);
-    //}
 
     return newsContents;
 }
