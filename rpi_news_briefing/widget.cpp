@@ -125,7 +125,7 @@ Widget::Widget(QWidget *parent)
     QFrame *frame2 = new QFrame(this);
     m_textEdit = new QTextEdit(frame2);
     m_textEdit->setGeometry(10, 100, 620, 520);
-    m_fontScale = 10;
+    m_fontScale = 20;
     QFont font = m_textEdit->currentFont();
     font.setPointSizeF(m_fontScale);
     m_textEdit->setCurrentFont(font);
@@ -261,17 +261,7 @@ void Widget::readNews(int id)
 
     if(m_contents.size() == 0)
         return;
-    //m_textEdit->setText(topic[id].c_str());
-    //std::cout << "News Topic : " << topic << std::endl;
-    //std::string tempStr = "djisjdiosjadiojsadoijasdoijsaoijdoiasjdojsaodijiosajdiosajdoisajdoijasoidjoisajdoisajdoijsaoidjaosidjoi게임업계가 모바일게임의 생명연장을 두고 골머리를 앓는다  모바일게임 제작비용은  콘솔 등 기타 플랫폼의 게임과 비슷한 수준이지만 수명이 짧다  최근 모바일게임업계를 강타한  열풍이 대표적이다  게임업계 한 관계자는 모바일게임 개발비용이 수백억원에 달할 정도로 증가했다며 이에 상응하는 수익을 내기 위해서는 게임의 수익구조보다 게임성에 집중해 앱마켓의 매출 상위권 목록에 오래 살아있어야 한다고 말했다";  
     m_textEdit->setText(QString::fromLocal8Bit(m_contents[0].c_str()));
-    //m_textEdit->setText(QString::fromLocal8Bit(tempStr.c_str()));
-    std::cout << "size : " << m_contents.size() << std::endl;
-    std::cout << m_contents[0]  << std::endl;
-    //for(const auto& text : m_contents) {
-    //    std::cout << "nc_test::" << cnt++ << " text : " << std::endl;
-    //    std::cout << text << std::endl;
-    //}
 }
 
 void Widget::anotherContent(int id)
@@ -280,7 +270,7 @@ void Widget::anotherContent(int id)
         m_page++;
         
         if(m_page > (int)m_contents.size()){
-            QMessageBox::warning(this, "Error", "There is no next page.", QMessageBox::Ok, NULL);
+            QMessageBox::warning(this, "Error", "There is no next page.", QMessageBox::Ok, 0);
             m_page--;
             return;
         }
@@ -291,7 +281,7 @@ void Widget::anotherContent(int id)
     else if(id == 2){
         m_page--;
         if(m_page <= 0){
-            QMessageBox::warning(this, "Error", "There is no previous page.", QMessageBox::Ok, NULL);
+            QMessageBox::warning(this, "Error", "There is no previous page.", QMessageBox::Ok, 0);
             m_page++;
             return;
         }
